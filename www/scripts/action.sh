@@ -6,49 +6,50 @@ if [[ $# -eq 0 ]] ; then
 fi
 
 # Action argument should be available in $1
-action="$1"
-echo "$action"
+ACTION="$1"
+IRSEND="irsend SEND_ONCE SAMSUNG"
 
-case ${action} in
-	"channelUp") echo ""
+
+case ${ACTION} in
+	"channelUp") $IRSEND KEY_CHANNELUP
 	;;
-	"channelDown") echo ""
+	"channelDown") $IRSEND KEY_CHANNELDOWN
 	;;
-	"volumeUp") echo ""
+	"volumeUp") $IRSEND KEY_VOLUMEUP
 	;;
-	"volumeUp") echo ""
+	"volumeDown") $IRSEND KEY_VOLUMEDOWN
 	;;
-	"power") irsend SEND_ONCE SAMSUNG KEY_POWER
+	"power") $IRSEND KEY_POWER
 	;;
-	"up") echo ""
+	"up") $IRSEND KEY_UP
 	;;
-	"down") echo ""
+	"down") $IRSEND KEY_DOWN
 	;;
-	"left") echo ""
+	"left") $IRSEND KEY_LEFT
 	;;
-	"right") echo ""
+	"right") $IRSEND KEY_RIGHT
 	;;
-	"select") echo ""
+	"select") $IRSEND KEY_SELECT
 	;;
-	"channel0") echo ""
+	"channel0") $IRSEND BTN_0
 	;;
-	"channel1") echo ""
+	"channel1") $IRSEND BTN_1
 	;;
-	"channel2") echo ""
+	"channel2") $IRSEND BTN_2
 	;;
-	"channel3") echo ""
+	"channel3") $IRSEND BTN_3
 	;;
-	"channel4") echo ""
+	"channel4") $IRSEND BTN_4
 	;;
-	"channel5") echo ""
+	"channel5") $IRSEND BTN_5
 	;;
-	"channel6") echo ""
+	"channel6") $IRSEND BTN_6
 	;;
-	"channel7") echo ""
+	"channel7") $IRSEND BTN_7
 	;;
-	"channel8") echo ""
+	"channel8") $IRSEND BTN_8
 	;;
-	"channel9") echo ""
+	"channel9") $IRSEND BTN_9
 	;;
 esac
 
