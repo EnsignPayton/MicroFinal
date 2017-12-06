@@ -1,6 +1,18 @@
 # Universal Remote Project
 
+## Overview
+
 This project presents a web interface for a universal remote using a Raspberry Pi, complete with a livestream of the TV or device being controlled. 
+
+The project is divided in to two parts, collected together on the final webpage.
+
+### Input
+
+The input is a USB webcam, typically mounted to `/dev/video0`. We read from the webcam, encode the stream in H.264, and push out over RTMP with FFMpeg. This stream is picked up locally by NGINX and translated to an HLS stream. We grab the HLS stream on the frontend via Hls.js, which displays our livestream in an html video element.
+
+### Output
+
+The output is infrared light emitted by GPIO connected circuitry. Buttons on the frontend execute an AJAX call through jQuery which calls a PHP script. This PHP script executes a shell script, which parses the command type passed as an argument and executes the proper command. Commands are send using the `irsend` tool of the LIRC project.
 
 ## Setup
 
@@ -33,8 +45,31 @@ make -j4
 ### 2. Set up NGINX
 
 NGINX must be compiled with a module to process RTMP streams.
+Install dependencies: 
 
-... Under construction ...
+```sh
+sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev
+```
+
+Get the source for NGINX and the RTMP module:
+
+```sh
+cd ~
+git clone https://github.com/sergey-dryabzhinsky/nginx-rtmp-module.git
+wget http://nginx.org/download/nginx-1.13.7.tar.gz
+tar xf nginx-1.13.7.tar.gz
+cd nginx-1.13.7
+```
+
+Compile and install
+
+```sh
+./configure --with-http_ssl_module --add-module=../nginx-rtmp-module
+make -j 1
+sudo make install
+```
+
+To configure, copy `nginx.conf` to `/etc/nginx` and make changes as desired.
 
 ### 3. Set up PHP
 
