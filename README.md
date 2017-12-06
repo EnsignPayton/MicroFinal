@@ -112,3 +112,14 @@ This command can (and should) be modified for the proper config.
 
 TODO: Modify command to use hardware encoder.
 
+## Resources
+
+These things helped:
+
+* http://www.lirc.org/html/irsend.html
+* https://www.ocinside.de/modding_en/linux_ir_irrecord_list/
+* http://ffmpeg.org/pipermail/ffmpeg-user/2017-October/037577.html
+* https://www.reddit.com/r/raspberry_pi/comments/5677qw/hardware_accelerated_x264_encoding_with_ffmpeg/
+* https://docs.peer5.com/guides/setting-up-hls-live-streaming-server-using-nginx/
+* https://stackoverflow.com/questions/19658216/how-can-we-transcode-live-rtmp-stream-to-live-hls-stream-using-ffmpeg
+
