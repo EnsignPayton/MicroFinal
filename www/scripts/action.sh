@@ -7,6 +7,7 @@ fi
 
 # Action argument should be available in $1
 action="$1"
+echo "$action"
 
 case ${action} in
 	"channelUp") echo ""
@@ -17,7 +18,7 @@ case ${action} in
 	;;
 	"volumeUp") echo ""
 	;;
-	"power") echo ""
+	"power") irsend SEND_ONCE SAMSUNG KEY_POWER
 	;;
 	"up") echo ""
 	;;
