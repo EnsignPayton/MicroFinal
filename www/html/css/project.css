@@ -1,0 +1,13 @@
+#video {
+	height: 480px;
+	width: 640px;
+	background-color: black;
+}
+
+.spacer {
+	height: 20px;
+}
+
+.centered {
+	margin: auto;
+}
