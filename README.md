@@ -71,9 +71,30 @@ sudo make install
 
 To configure, copy `nginx.conf` to `/etc/nginx` and make changes as desired.
 
+Finally, restart the server
+
+```sh
+sudo service nginx restart
+```
+
 ### 3. Set up PHP
 
-... Under construction ...
+Install the PHP package (nope, no compiling this one):
+
+```sh
+sudo apt-get install php-fpm
+```
+
+Make sure we have `cgi.fix_pathinfo=0` in `/etc/php/7.0/fpm/php.ini`.
+
+Now, configure NGINX to use PHP. This is already done in the provided conf, if you're not using it then just figure it out.
+
+Finally, restart our stuff:
+
+```sh
+sudo service php7.0-fpm restart
+sudo service nginx restart
+```
 
 ### 4. Add frontend
 
@@ -88,5 +109,6 @@ ffmpeg -i /dev/video0 -c:v libx264 -b:v 1500K -pix_fmt yuv420p -c:a:0 libfdk_aac
 ```
 
 This command can (and should) be modified for the proper config.
+
 TODO: Modify command to use hardware encoder.
 
