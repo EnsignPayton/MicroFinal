@@ -8,7 +8,7 @@ if (isset($_GET['action'])) {
 }
 
 // Pipe the action to a shell script
-$message=shell_exec("/var/www/scripts/test.sh {$action} 2>&1");
+$message=shell_exec("/var/www/scripts/action.sh {$action} 2>&1");
 print_r($message);
 
 ?>
