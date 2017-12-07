@@ -121,7 +121,17 @@ sudo service php7.0-fpm restart
 sudo service nginx restart
 ```
 
-### 4. Add frontend
+### 4. Set up LIRC
+
+We have to install it first:
+
+```sh
+sudo apt-get install lirc
+```
+
+There's probably some other setup here, but I don't know it (yet!)
+
+### 5. Add frontend
 
 Copy the contents of `www` to `/var/www`, or wherever you host your website. 
 
@@ -130,7 +140,7 @@ cd MicroFinal
 sudo cp -rv ./www /var
 ```
 
-### 5. Run FFMpeg
+### 6. Run FFMpeg
 
 Finally, to start the livestream, run FFMpeg:
 
