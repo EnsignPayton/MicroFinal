@@ -78,6 +78,12 @@ sudo make install
 
 To configure, copy `nginx.conf` to `/etc/nginx` and make changes as desired.
 
+```sh
+git clone https://github.com/EnsignPayton/MicroFinal.git
+cd MicroFinal
+sudo cp -v nginx.conf /etc/nginx
+```
+
 Finally, restart the server
 
 ```sh
@@ -106,6 +112,11 @@ sudo service nginx restart
 ### 4. Add frontend
 
 Copy the contents of `www` to `/var/www`, or wherever you host your website. 
+
+```sh
+cd MicroFinal
+sudo cp -rv ./www /var
+```
 
 ### 5. Run FFMpeg
 
