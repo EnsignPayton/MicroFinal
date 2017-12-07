@@ -6,6 +6,8 @@ This project presents a web interface for a universal remote using a Raspberry P
 
 The project is divided in to two parts, collected together on the final webpage.
 
+![image](https://user-images.githubusercontent.com/18620874/33733009-4ec83fe8-db56-11e7-9cb2-9ba61bb9e273.png)
+
 ### Input
 
 The input is a USB webcam, typically mounted to `/dev/video0`. We read from the webcam, encode the stream in H.264, and push out over RTMP with FFMpeg. This stream is picked up locally by NGINX and translated to an HLS stream. We grab the HLS stream on the frontend via Hls.js, which displays our livestream in an html video element.
