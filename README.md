@@ -76,6 +76,13 @@ make -j 1
 sudo make install
 ```
 
+For some reason, this doesn't install where we want. You could probably change that in configure but this works too:
+
+```sh
+sudo mv -v /usr/sbin/nginx /usr/sbin/nginx.old
+sudo ln -sfv /usr/local/nginx/sbin/nginx /usr/sbin/nginx
+```
+
 To configure, copy `nginx.conf` to `/etc/nginx` and make changes as desired.
 
 ```sh
