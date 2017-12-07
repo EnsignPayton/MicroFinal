@@ -51,6 +51,13 @@ Install dependencies:
 sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev
 ```
 
+The easiest way to properly configure your system is to install and then remove the repo version:
+
+```sh
+sudo apt-get install nginx
+sudo apt-get remove nginx
+```
+
 Get the source for NGINX and the RTMP module:
 
 ```sh
