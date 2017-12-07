@@ -48,7 +48,7 @@ NGINX must be compiled with a module to process RTMP streams.
 Install dependencies: 
 
 ```sh
-sudo apt-get install build-essential libpcre3 libpcre3-dev libssl-dev
+sudo apt-get install build-essential libpcre3 libpcre3-dev libpcre++-dev curl libcurl4-openssl-dev libssl-dev zlib1g-dev
 ```
 
 The easiest way to properly configure your system is to install and then remove the repo version:
@@ -56,6 +56,7 @@ The easiest way to properly configure your system is to install and then remove 
 ```sh
 sudo apt-get install nginx
 sudo apt-get remove nginx
+sudo apt-get clean
 ```
 
 Get the source for NGINX and the RTMP module:
@@ -63,6 +64,7 @@ Get the source for NGINX and the RTMP module:
 ```sh
 cd ~
 git clone https://github.com/sergey-dryabzhinsky/nginx-rtmp-module.git
+sudo cp -rv nginx-rtmp-module /usr/src
 wget http://nginx.org/download/nginx-1.13.7.tar.gz
 tar xf nginx-1.13.7.tar.gz
 cd nginx-1.13.7
@@ -71,16 +73,17 @@ cd nginx-1.13.7
 Compile and install
 
 ```sh
-./configure --with-http_ssl_module --add-module=../nginx-rtmp-module
+./configure --prefix=/var/www \
+            --sbin-path=/usr/sbin/nginx \
+            --conf-path=/etc/nginx/nginx.conf \
+            --pid-path=/var/run/nginx.pid \
+            --error-log-path=/var/log/nginx/error.log \  
+            --http-log-path=/var/log/nginx/access.log \ 
+            --with-http_ssl_module \
+            --without-http_proxy_module \ 
+            --add-module=/usr/src/nginx-rtmp-module
 make -j 1
 sudo make install
-```
-
-For some reason, this doesn't install where we want. You could probably change that in configure but this works too:
-
-```sh
-sudo mv -v /usr/sbin/nginx /usr/sbin/nginx.old
-sudo ln -sfv /usr/local/nginx/sbin/nginx /usr/sbin/nginx
 ```
 
 To configure, copy `nginx.conf` to `/etc/nginx` and make changes as desired.
@@ -147,4 +150,4 @@ These things helped:
 * https://www.reddit.com/r/raspberry_pi/comments/5677qw/hardware_accelerated_x264_encoding_with_ffmpeg/
 * https://docs.peer5.com/guides/setting-up-hls-live-streaming-server-using-nginx/
 * https://stackoverflow.com/questions/19658216/how-can-we-transcode-live-rtmp-stream-to-live-hls-stream-using-ffmpeg
-
+* https://pkula.blogspot.de/2013/06/live-video-stream-from-raspberry-pi.html
