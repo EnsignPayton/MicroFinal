@@ -129,7 +129,60 @@ We have to install it first:
 sudo apt-get install lirc
 ```
 
-There's probably some other setup here, but I don't know it (yet!)
+Enable some kernel modules:
+
+```sh
+sudo cat >> /etc/modules << EOF
+lirc_dev
+lirc_rpi gpio_in_pin=23 gpio_out_pin=22
+EOF
+```
+
+Configure LIRC for your hardware:
+
+```sh
+sudo cat > /etc/lirc/hardware.conf << EOF
+# Arguments which will be used when launching lircd
+LIRCD_ARGS="--uinput"
+
+# Don't start lircmd even if there seems to be a good config file
+# START_LIRCMD=false
+
+# Don't start irexec, even if a good config file seems to exist.
+# START_IREXEC=false
+
+# Try to load appropriate kernel modules
+LOAD_MODULES=true
+
+# Run "lircd --driver=help" for a list of supported drivers.
+DRIVER="default"
+
+# usually /dev/lirc0 is the correct setting for systems using udev
+DEVICE="/dev/lirc0"
+
+MODULES="lirc_rpi"
+
+# Default configuration files for your hardware if any
+LIRCD_CONF=""
+LIRCMD_CONF=""
+EOF
+```
+
+Enable LIRC in your device tree:
+
+```sh
+sudo cat >> /boot/config.txt << EOF
+dtoverlay=lirc-rpi,gpio_in_pin=23,gpio_out_pin=22
+EOF
+```
+
+And restart LIRC:
+
+```sh
+sudo service lircd restart
+```
+
+There's more configuration to be done, and I haven't gotten it working yet. Might update when I do.
 
 ### 5. Add frontend
 
@@ -159,3 +212,4 @@ These things helped:
 * https://docs.peer5.com/guides/setting-up-hls-live-streaming-server-using-nginx/
 * https://stackoverflow.com/questions/19658216/how-can-we-transcode-live-rtmp-stream-to-live-hls-stream-using-ffmpeg
 * https://pkula.blogspot.de/2013/06/live-video-stream-from-raspberry-pi.html
+* https://www.hackster.io/austin-stanton/creating-a-raspberry-pi-universal-remote-with-lirc-2fd581
