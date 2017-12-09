@@ -14,7 +14,7 @@ The input is a USB webcam, typically mounted to `/dev/video0`. We read from the 
 
 ### Output
 
-The output is infrared light emitted by GPIO connected circuitry. Buttons on the frontend execute an AJAX call through jQuery which calls a PHP script. This PHP script executes a shell script, which parses the command type passed as an argument and executes the proper command. Commands are send using the `irsend` tool of the LIRC project.
+The output is infrared light emitted by GPIO connected circuitry. Buttons on the frontend execute an AJAX call through jQuery which calls a PHP script. This PHP script executes a shell script, which parses the command type passed as an argument and executes the proper command. Commands are sent using the `irsend` tool of the LIRC project.
 
 ## Setup
 
